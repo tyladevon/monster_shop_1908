@@ -14,7 +14,7 @@ class MerchantsController <ApplicationController
   def create
     merchant = Merchant.create(merchant_params)
     if merchant.save
-      redirect_to "/merchants"
+      redirect_to merchants_path
     else
       flash[:error] = merchant.errors.full_messages.to_sentence
       render :new
@@ -37,7 +37,6 @@ class MerchantsController <ApplicationController
   end
 
   def destroy
-    Item.delete(Item.where(merchant_id: params[:id]))
     Merchant.destroy(params[:id])
     redirect_to '/merchants'
   end
