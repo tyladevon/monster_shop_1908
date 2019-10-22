@@ -1,2 +1,21 @@
-<h1>Users#new</h1>
-<p>Find me in app/views/users/new.html.erb</p>
+<h1>Create Account</h1>
+
+<%= form_tag "/users" do %>
+  <%= label_tag "Name" %>
+  <%= text_field_tag :name %>
+  <%= label_tag "Street Address" %>
+  <%= text_field_tag :street_address %>
+  <%= label_tag "City" %>
+  <%= text_field_tag :city %>
+  <%= label_tag "State" %>
+  <%= text_field_tag :state %>
+  <%= label_tag "Zip" %>
+  <%= text_field_tag :zip %>
+  <%= label_tag "Email" %>
+  <%= email_field_tag :email %>
+  <%= label_tag "Password" %>
+  <%= password_field_tag :password %>
+  <%= label_tag "Confirm Password" %>
+  <%= password_field_tag :password_confirmation %>
+  <%= submit_tag "Submit" %>
+<% end %>
