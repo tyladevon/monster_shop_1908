@@ -34,7 +34,7 @@ RSpec.describe 'Site Navigation' do
         click_link "Register"
       end
 
-      expect(current_path).to eq("/users/new")
+      expect(current_path).to eq("/register")
     end
 
     it "I can see a cart indicator on all pages" do
