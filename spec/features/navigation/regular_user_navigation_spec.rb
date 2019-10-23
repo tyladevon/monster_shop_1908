@@ -12,7 +12,6 @@ RSpec.describe "Registered User" do
                          password: "rainbows1908",
                          role: 0)
 
-      # session[:user_id] = @user.id
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
       visit '/'
 
