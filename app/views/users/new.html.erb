@@ -2,15 +2,15 @@
 
 <%= form_tag "/users" do %>
   <%= label_tag "Name" %>
-  <%= text_field_tag :name %>
+  <%= text_field_tag :name, @user.name %>
   <%= label_tag "Street Address" %>
-  <%= text_field_tag :street_address %>
+  <%= text_field_tag :street_address, @user.street_address %>
   <%= label_tag "City" %>
-  <%= text_field_tag :city %>
+  <%= text_field_tag :city, @user.city %>
   <%= label_tag "State" %>
-  <%= text_field_tag :state %>
+  <%= text_field_tag :state, @user.state %>
   <%= label_tag "Zip" %>
-  <%= text_field_tag :zip %>
+  <%= text_field_tag :zip, @user.zip %>
   <%= label_tag "Email" %>
   <%= email_field_tag :email %>
   <%= label_tag "Password" %>
