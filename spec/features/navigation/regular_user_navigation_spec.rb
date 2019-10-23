@@ -12,14 +12,15 @@ RSpec.describe "Registered User" do
                          password: "rainbows1908",
                          role: 0)
       visit '/'
+      click_link "Login"
 
-      save_and_open_page
-      fill_in :email, with: "deedee@gmail.com"
+      fill_in :username, with: "deedee@gmail.com"
       fill_in :password, with: "rainbows1908"
       click_link "Login"
 
-      expect(current_path).to eq('/profile')
+      expect(current_path).to eq('/login')
     end
+
     it "can see some same links in nav bar" do
 
       expect(page).to have_link "All Items"
@@ -30,6 +31,7 @@ RSpec.describe "Registered User" do
 
     it "can see additional links in nav bar" do
 
+      save_and_open_page
       expect(page).to have_link "My Profile"
       expect(page).to have_link "Logout"
     end
