@@ -26,7 +26,6 @@ RSpec.describe "Registered User" do
 
     it "can see additional links in nav bar" do
 
-      # save_and_open_page
       expect(page).to have_link "Profile"
       expect(page).to have_link "Logout"
     end
