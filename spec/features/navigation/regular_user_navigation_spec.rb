@@ -11,18 +11,14 @@ RSpec.describe "Registered User" do
                          email: "deedee@gmail.com",
                          password: "rainbows1908",
                          role: 0)
+
+      # session[:user_id] = @user.id
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
       visit '/'
-      click_link "Login"
 
-      fill_in :username, with: "deedee@gmail.com"
-      fill_in :password, with: "rainbows1908"
-      click_link "Login"
-
-      expect(current_path).to eq('/login')
     end
 
     it "can see some same links in nav bar" do
-
       expect(page).to have_link "All Items"
       expect(page).to have_link "All Merchants"
       expect(page).to have_link "Home"
@@ -31,20 +27,19 @@ RSpec.describe "Registered User" do
 
     it "can see additional links in nav bar" do
 
-      save_and_open_page
-      expect(page).to have_link "My Profile"
+      # save_and_open_page
+      expect(page).to have_link "Profile"
       expect(page).to have_link "Logout"
     end
 
     it "see's logged in message" do
-      expect(page).to have_content("Logged in as ")
+      expect(page).to have_content("Logged in as #{@user.name}")
     end
 
     it "cannot see some links in navbar" do
 
       expect(page).to_not have_link "Login"
       expect(page).to_not have_link "Register"
-
     end
   end
 end
