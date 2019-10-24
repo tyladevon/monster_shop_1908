@@ -1,2 +1,8 @@
 <h1>Welcome <%= @user.name %></h1>
-  
+<h3>Your Profile</h3>
+<p>Name: <%= @user.name %></p>
+<p>Email: <%= @user.email %></p>
+<p>Address: <%= @user.street_address %></p>
+<p><%= "#{@user.city}, #{@user.state} #{@user.zip}" %></p>
+<br>
+<%= link_to 'Edit Profile', "/users/#{@user.id}/edit" %>
