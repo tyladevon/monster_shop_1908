@@ -28,7 +28,7 @@
         <%= link_to  "Register", "/register" %>
       <% else %>
         <%= link_to  "Profile", "/profile" %>
-        <%= link_to  "Logout", "/logout" %>
+        <%= link_to  "Logout", "/logout", method: :delete %>
         <p>Logged in as <%= current_user.name %></p>
       <% end %>
     </nav>
