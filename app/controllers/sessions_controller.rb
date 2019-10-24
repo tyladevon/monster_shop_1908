@@ -24,6 +24,13 @@ class SessionsController < ApplicationController
     end
   end
 
+  def destroy
+    session.delete(:cart)
+    session.delete(:user_id)
+    flash[:success] = "You have been successfully logged out!"
+    redirect_to '/'
+  end
+
   private
     def login_params
       params.permit(:email, :password)
