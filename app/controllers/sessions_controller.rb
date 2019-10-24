@@ -1,6 +1,9 @@
 class SessionsController < ApplicationController
   def new
-
+    if current_user
+      flash[:success] = "You are already logged in #{current_user.name}"
+      redirect_user 
+    end
   end
 
   def create
@@ -24,5 +27,15 @@ class SessionsController < ApplicationController
   private
     def login_params
       params.permit(:email, :password)
+    end
+
+    def redirect_user
+      if current_user.reg?
+        redirect_to '/profile'
+      elsif current_merchant?
+        redirect_to '/merchant/dashboard'
+      elsif current_admin?
+        redirect_to '/admin/dashboard'
+      end
     end
 end
