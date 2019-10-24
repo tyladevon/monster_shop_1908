@@ -10,6 +10,19 @@ RSpec.describe "Items Index Page" do
 
       @pull_toy = @brian.items.create(name: "Pull Toy", description: "Great pull toy!", price: 10, image: "http://lovencaretoys.com/image/cache/dog/tug-toy-dog-pull-9010_2-800x800.jpg", inventory: 32)
       @dog_bone = @brian.items.create(name: "Dog Bone", description: "They'll love it!", price: 21, image: "https://img.chewy.com/is/image/catalog/54226_MAIN._AC_SL1500_V1534449573_.jpg", active?:false, inventory: 21)
+
+      @user = User.create(name: "Dee",
+                         street_address: "4233 Street",
+                         city: "Golden",
+                         state: "CO",
+                         zip: "80042",
+                         email: "deedee@gmail.com",
+                         password: "rainbows1908",
+                         role: 1)
+
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+
+
     end
 
     it "all items or merchant names are links" do
