@@ -28,4 +28,10 @@ describe 'As a merchant employee user' do
   it "can see link to merchant dashboard" do
     expect(page).to have_link 'Dashboard'
   end
+
+  it "can't access admin paths" do
+    visit '/admin/dashboard'
+
+    expect(page).to have_content("The page you were looking for doesn't exist")
+  end
 end
