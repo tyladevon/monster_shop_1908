@@ -12,15 +12,13 @@ RSpec.describe "Regular user visit profile page" do
                          password: "rainbows1908",
                          role: 0)
 
-    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
     visit '/profile'
-
     click_link "Edit Password"
-    expect(current_path).to eq("/user/#{user.id}/edit")
+    expect(current_path).to eq("/profile/edit/password")
 
-    fill_in :new_password, with: "Rainbows1900"
-    fill_in :new_password_confirmation, with: "Rainbows1900"
-
+    fill_in :password, with: "Rainbows1900"
+    fill_in :password_confirmation, with: "Rainbows1900"
     click_button "Submit"
     expect(current_path).to eq("/profile")
     expect(page).to have_content("Your password has been updated!")
