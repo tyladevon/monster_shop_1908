@@ -34,7 +34,12 @@ end
   it "cannot see link for shopping cart" do
     expect(page).to_not have_content("Cart")
   end
+
+  it "cannot access merchant or cart path" do
+    visit "/merchant/dashboard"
+    expect(page).to have_content("The page you were looking for doesn't exist.")
+
+    visit "/cart"
+    expect(page).to have_content("The page you were looking for doesn't exist.")
+  end
 end
-#
-# Minus the following links/info
-# - a link to my shopping cart ("/cart") or count of cart items
