@@ -99,7 +99,10 @@ describe 'as a registered user' do
 
       click_button 'Update Information'
 
+      expect(page).to have_content("Your information has been updated!")
+
       expect(current_path).to eq('/profile')
+
       expect(page).to have_content('Reggie')
       expect(page).to have_content('345 Street')
       expect(page).to have_content('El Paso')
@@ -119,14 +122,16 @@ describe 'as a registered user' do
 
       click_button 'Update Information'
 
+      expect(page).to have_content("Your information has been updated!")
+
+      expect(current_path).to eq('/profile')
+
       expect(page).to have_content('Boss')
       expect(page).to have_content('345 Avenue')
       expect(page).to have_content('Lubbock')
       expect(page).to have_content('Texas')
       expect(page).to have_content('22222')
       expect(page).to have_content('boss@gmail.com')
-
-      expect(current_path).to eq('/profile')
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merch)
       visit '/profile/edit'
@@ -139,6 +144,8 @@ describe 'as a registered user' do
       fill_in :email, with: "merchant@gmail.com"
 
       click_button 'Update Information'
+
+      expect(page).to have_content("Your information has been updated!")
 
       expect(current_path).to eq('/profile')
 
