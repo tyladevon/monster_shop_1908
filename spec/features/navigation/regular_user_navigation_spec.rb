@@ -3,18 +3,19 @@ require 'rails_helper'
 RSpec.describe "Registered User" do
   describe "User's View" do
     before(:each) do
-      @user = User.create(name: "Dee",
-                         street_address: "4233 Street",
-                         city: "Golden",
-                         state: "CO",
-                         zip: "80042",
-                         email: "deedee@gmail.com",
-                         password: "rainbows1908",
-                         role: 0)
+      @user = User.create(
+        name: "Dee",
+        street_address: "4233 Street",
+        city: "Golden",
+        state: "CO",
+        zip: "80042",
+        email: "deedee@gmail.com",
+        password: "rainbows1908",
+        role: 0
+      )
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
       visit '/'
-
     end
 
     it "can see some same links in nav bar" do
