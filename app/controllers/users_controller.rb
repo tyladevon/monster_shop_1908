@@ -17,9 +17,9 @@ class UsersController < ApplicationController
 
   def show
     if current_user
-      @user = User.find(session[:user_id])
+      @user = current_user
     else
-      render file: "/public/404" unless current_user
+      render file: "/public/404"
     end
   end
 
