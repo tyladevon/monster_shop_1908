@@ -10,8 +10,10 @@ class SessionsController < ApplicationController
       flash[:success] = "Welcome, #{user.name}!"
       if user.reg?
         redirect_to '/profile'
-      else
-        redirect_to '/dashboard'
+      elsif user.admin?
+        redirect_to '/admin/dashboard'
+      elsif user.merch_employee? || user.merch_admin?
+        redirect_to '/merchant/dashboard'
       end
     else
       flash.now[:error] = "Email and password do not match."
