@@ -21,7 +21,6 @@ RSpec.describe "Regular user visits items index" do
 
   expect(page).to have_content("Pull Toy")
   expect(page).to_not have_content("Dog Bone")
-  # save_and_open_page
   find(".item-link-image").click
   expect(current_path).to eq ("/items/#{pull_toy.id}")
   end
