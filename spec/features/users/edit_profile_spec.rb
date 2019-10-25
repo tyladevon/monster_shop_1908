@@ -43,20 +43,25 @@ describe 'as a registered user' do
       visit '/profile'
       click_link 'Edit Profile'
 
+      expect(current_path).to eq("/profile/edit/profile")
+
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@admin)
       visit '/profile'
       click_link 'Edit Profile'
+
+      expect(current_path).to eq("/profile/edit/profile")
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merch)
       visit '/profile'
       click_link 'Edit Profile'
 
-      expect(current_path).to eq("/profile/edit")
+      expect(current_path).to eq("/profile/edit/profile")
+
     end
 
     it "I see a form prepopulated with my info except my password " do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
-      visit '/profile/edit'
+      visit '/profile/edit/profile'
 
       expect(find_field(:name).value).to eq("Profile User")
       expect(find_field(:street_address).value).to eq("345 Blvd")
@@ -66,7 +71,7 @@ describe 'as a registered user' do
       expect(find_field(:email).value).to eq("profile@gmail.com")
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@admin)
-      visit '/profile/edit'
+      visit '/profile/edit/profile'
 
       expect(find_field(:name).value).to eq("Profile Admin")
       expect(find_field(:street_address).value).to eq("456 Ct")
@@ -76,7 +81,7 @@ describe 'as a registered user' do
       expect(find_field(:email).value).to eq("admin@gmail.com")
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merch)
-      visit '/profile/edit'
+      visit '/profile/edit/profile'
 
       expect(find_field(:name).value).to eq("Profile Merch")
       expect(find_field(:street_address).value).to eq("567 Ave")
@@ -88,7 +93,7 @@ describe 'as a registered user' do
 
     it "When I submit new information, my information is updated" do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
-      visit '/profile/edit'
+      visit '/profile/edit/profile'
 
       fill_in :name, with: "Reggie"
       fill_in :street_address, with: "345 Street"
@@ -111,7 +116,7 @@ describe 'as a registered user' do
       expect(page).to have_content('reggie@gmail.com')
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@admin)
-      visit '/profile/edit'
+      visit '/profile/edit/profile'
 
       fill_in :name, with: "Boss"
       fill_in :street_address, with: "345 Avenue"
@@ -134,7 +139,7 @@ describe 'as a registered user' do
       expect(page).to have_content('boss@gmail.com')
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merch)
-      visit '/profile/edit'
+      visit '/profile/edit/profile'
 
       fill_in :name, with: "Merchant"
       fill_in :street_address, with: "432 Circle"
@@ -160,7 +165,7 @@ describe 'as a registered user' do
     it "I can't change my email address to one belonging to another user" do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
 
-      visit '/profile/edit'
+      visit '/profile/edit/profile'
 
       fill_in :email, with: "admin@gmail.com"
 
