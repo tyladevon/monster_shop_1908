@@ -27,7 +27,6 @@ RSpec.describe "Visitor Registration" do
 
     click_button "Submit"
 
-    # expect(current_path).to eq('/register')
     expect(page).to have_content("Name can't be blank, Street address can't be blank, City can't be blank, State can't be blank, Zip can't be blank, Password can't be blank, Password can't be blank, and Email can't be blank")
   end
 
@@ -44,7 +43,6 @@ RSpec.describe "Visitor Registration" do
 
     click_button 'Submit'
 
-    # expect(current_path).to eq('/register')
     expect(page).to have_content("Password confirmation doesn't match Password")
   end
 
@@ -62,7 +60,6 @@ RSpec.describe "Visitor Registration" do
 
     click_button 'Submit'
 
-    # expect(current_path).to eq('/register')
     expect(find_field(:name).value).to eq("Bob G")
     expect(find_field(:street_address).value).to eq("5345 Address")
     expect(find_field(:city).value).to eq("Denver")
