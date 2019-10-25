@@ -42,8 +42,19 @@ describe Item, type: :model do
     end
 
     it 'no orders' do
+      user = User.create(
+        name: "Profile User",
+        street_address: "345 Blvd",
+        city: "San Antonio",
+        state: "Texas",
+        zip: "60789",
+        email: "profile@gmail.com",
+        password: "pass",
+        password_confirmation: "pass",
+        role: 0
+      )
       expect(@chain.no_orders?).to eq(true)
-      order = Order.create(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033)
+      order = Order.create(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033, user_id: user.id)
       order.item_orders.create(item: @chain, price: @chain.price, quantity: 2)
       expect(@chain.no_orders?).to eq(false)
     end

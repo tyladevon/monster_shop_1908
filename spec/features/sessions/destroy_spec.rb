@@ -23,7 +23,6 @@ RSpec.describe "Session destroy" do
 
         click_button 'Login'
         click_link "Logout"
-        save_and_open_page
 
         expect(current_path).to eq("/")
         expect(page).to have_content("You have been successfully logged out!")

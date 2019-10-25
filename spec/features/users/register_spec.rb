@@ -27,7 +27,7 @@ RSpec.describe "Visitor Registration" do
 
     click_button "Submit"
 
-    expect(page).to have_content("Name can't be blank, Street address can't be blank, City can't be blank, State can't be blank, Zip can't be blank, Password can't be blank, Password can't be blank, and Email can't be blank")
+    expect(page).to have_content("Name can't be blank, Street address can't be blank, City can't be blank, State can't be blank, Zip can't be blank, Password can't be blank, and Email can't be blank")
   end
 
   it "cannot register with mismatched password and password confirmation" do
@@ -69,6 +69,5 @@ RSpec.describe "Visitor Registration" do
     expect(find_field(:password).value).to eq(nil)
     expect(find_field(:password_confirmation).value).to eq(nil)
     expect(page).to have_content("Email has already been taken")
-
   end
 end

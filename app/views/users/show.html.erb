@@ -5,5 +5,8 @@
 <p>Address: <%= @user.street_address %></p>
 <p><%= "#{@user.city}, #{@user.state} #{@user.zip}" %></p>
 <br>
+<% if !@user.orders.empty? %>
+  <%= link_to 'My Orders', '/profile/orders' %>
+<% end %>
 <%= link_to 'Edit Profile', "/profile/edit/profile" %>
 <%= link_to 'Edit Password', "/profile/edit/password"  %>
