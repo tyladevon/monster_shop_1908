@@ -82,7 +82,18 @@ RSpec.describe 'Cart show' do
         visit '/cart'
         expect(page).to_not have_link("Empty Cart")
       end
+    end
+  end
 
+  describe "As a visitor" do
+    describe "When I click on the cart link" do
+      it "I am redirected to a page with the option to register or login" do
+        visit '/cart'
+
+        expect(page).to have_content("You must register, or login to checkout.")
+        expect(page).to have_link("register")
+        expect(page).to have_link("login")
+      end
     end
   end
 end
