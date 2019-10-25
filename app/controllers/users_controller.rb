@@ -32,7 +32,7 @@ class UsersController < ApplicationController
     if @user.update(user_params) && params[:commit] == "Update Information"
       flash[:success] = "Your information has been updated!"
       redirect_to '/profile'
-    elsif params[:commit] == "Submit" && params[:password] == params[:password_confirmation]
+    elsif params[:commit] == "Submit" && !params[:password].blank? && params[:password] == params[:password_confirmation]
       @user.password = params[:password]
       @user.save!
       flash[:success] = "Your password has been updated!"
@@ -40,7 +40,7 @@ class UsersController < ApplicationController
     elsif params[:commit] == "Update Information"
       flash[:notice] = @user.errors.full_messages.to_sentence
       redirect_to '/profile/edit/profile'
-    else 
+    else
       flash[:notice] = @user.errors.full_messages.to_sentence
       redirect_to '/profile/edit/password'
     end
