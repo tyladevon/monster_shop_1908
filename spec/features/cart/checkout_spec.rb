@@ -3,6 +3,19 @@ require 'rails_helper'
 RSpec.describe 'Cart show' do
   describe 'When I have added items to my cart' do
     before(:each) do
+      @user = User.create(
+        name: "Profile User",
+        street_address: "345 Blvd",
+        city: "San Antonio",
+        state: "Texas",
+        zip: "60789",
+        email: "profile@gmail.com",
+        password: "pass",
+        password_confirmation: "pass",
+        role: 0
+      )
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+      
       @mike = Merchant.create(name: "Mike's Print Shop", address: '123 Paper Rd.', city: 'Denver', state: 'CO', zip: 80203)
       @meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
 

@@ -1,6 +1,8 @@
 <h1>Cart</h1>
 
-<% if !@items.empty? %>
+<%= render partial: "partials/register_login" if !current_user %>
+
+<% if !@items.empty? && current_user %>
 <center>
 <table class = "cart-items">
   <tr>
@@ -47,7 +49,7 @@
   <p>Total: <%= number_to_currency(cart.total) %></p>
   <p><%= link_to "Empty Cart", "/cart", method: :delete %></p>
   <p><%= link_to "Checkout", "/orders/new", method: :get %></p>
-<% else %>
+<% elsif @items.empty? %>
   <h3 align= "center">Cart is currently empty</h3>
 <% end %>
 <table>
