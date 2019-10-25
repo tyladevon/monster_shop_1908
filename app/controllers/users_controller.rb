@@ -29,7 +29,6 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
-    # binding.pry
     if @user.update(user_params) && params[:commit] == "Update Information"
       flash[:success] = "Your information has been updated!"
       redirect_to '/profile'
@@ -38,9 +37,12 @@ class UsersController < ApplicationController
       @user.save!
       flash[:success] = "Your password has been updated!"
       redirect_to '/profile'
-    else
+    elsif params[:commit] == "Update Information"
       flash[:notice] = @user.errors.full_messages.to_sentence
-      render :edit
+      redirect_to '/profile/edit/profile'
+    else 
+      flash[:notice] = @user.errors.full_messages.to_sentence
+      redirect_to '/profile/edit/password'
     end
   end
 

@@ -16,7 +16,7 @@
     <%= email_field_tag :email, @user.email %>
     <%= submit_tag 'Update Information' %>
   <% end %>
-<% else %>
+<% elsif params[:type] == "password" %>
   <%= form_tag "/profile", method: :patch do %>
     <%= label_tag "New Password" %>
     <%= text_field_tag :password %>
