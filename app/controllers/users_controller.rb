@@ -29,20 +29,24 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
-    if @user.update(user_params) && params[:commit] == "Update Information"
-      flash[:success] = "Your information has been updated!"
-      redirect_to '/profile'
-    elsif params[:commit] == "Submit" && !params[:password].blank? && params[:password] == params[:password_confirmation]
-      @user.password = params[:password]
-      @user.save!
-      flash[:success] = "Your password has been updated!"
-      redirect_to '/profile'
-    elsif params[:commit] == "Update Information"
-      flash[:notice] = @user.errors.full_messages.to_sentence
-      redirect_to '/profile/edit/profile'
+    if params[:commit] == "Update Information"
+      if @user.update(profile_params)
+        flash[:success] = "Your information has been updated!"
+        redirect_to '/profile'
+      else
+        flash[:error] = @user.errors.full_messages.to_sentence
+        redirect_to '/profile/edit/profile'
+      end
     else
-      flash[:notice] = @user.errors.full_messages.to_sentence
-      redirect_to '/profile/edit/password'
+      if !params[:password].blank? && params[:password] == params[:password_confirmation]
+        @user.password = params[:password]
+        @user.save!
+        flash[:success] = "Your password has been updated!"
+        redirect_to '/profile'
+      else
+        flash[:error] = "Passwords must match and not be blank."
+        redirect_to '/profile/edit/password'
+      end
     end
   end
 
@@ -50,5 +54,9 @@ class UsersController < ApplicationController
 
   def user_params
     params.permit(:name, :street_address, :city, :state, :zip, :email, :password, :password_confirmation)
+  end
+
+  def profile_params
+    params.permit(:name, :street_address, :city, :state, :zip, :email)
   end
 end
