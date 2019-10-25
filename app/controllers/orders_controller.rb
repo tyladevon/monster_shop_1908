@@ -26,6 +26,10 @@ class OrdersController <ApplicationController
     end
   end
 
+  def index
+    @user = current_user
+  end
+
 
   private
 
