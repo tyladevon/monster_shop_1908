@@ -28,7 +28,7 @@ RSpec.describe "Visitor Registration" do
     click_button "Submit"
 
     # expect(current_path).to eq('/register')
-    expect(page).to have_content("Name can't be blank, Street address can't be blank, City can't be blank, State can't be blank, Zip can't be blank, Password can't be blank, Password can't be blank, and Email can't be blank")
+    expect(page).to have_content("Name can't be blank, Street address can't be blank, City can't be blank, State can't be blank, Zip can't be blank, Password can't be blank, and Email can't be blank")
   end
 
   it "cannot register with mismatched password and password confirmation" do
