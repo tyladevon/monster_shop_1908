@@ -160,7 +160,7 @@ describe 'as a registered user' do
     it "I can't change my email address to one belonging to another user" do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
 
-      visit '/profile/edit'
+      visit '/profile/edit/profile'
 
       fill_in :email, with: "admin@gmail.com"
 
