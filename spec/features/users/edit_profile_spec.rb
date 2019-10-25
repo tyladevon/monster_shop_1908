@@ -161,5 +161,17 @@ describe 'as a registered user' do
       expect(page).to have_content('33333')
       expect(page).to have_content('merchant@gmail.com')
     end
+
+    it "I can't change my email address to one belonging to another user" do
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+
+      visit '/profile/edit/profile'
+
+      fill_in :email, with: "admin@gmail.com"
+
+      click_button 'Update Information'
+
+      expect(page).to have_content('Email has already been taken')
+    end
   end
 end
