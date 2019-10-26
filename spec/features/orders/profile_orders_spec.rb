@@ -25,7 +25,7 @@ describe "As a registered user" do
 
       visit '/profile/orders'
     end
-    
+
     it "I see details of every order I've made" do
       within "#order-#{@order_1.id}" do
         expect(page).to have_link(@order_1.id)
@@ -37,10 +37,34 @@ describe "As a registered user" do
       end
     end
 
-    it "When I click the link of the id, I am brought to that order's show page" do
-      click_link "#{@order_1.id}"
+    describe "When I click on link of the id, I am brought to that order's show page" do
+      it "can see all information of that order" do
 
-      expect(current_path).to eq("/profile/orders/#{@order_1.id}")
+        click_link "#{@order_1.id}"
+
+        expect(current_path).to eq("/profile/orders/#{@order_1.id}")
+        save_and_open_page
+        expect(page).to have_link(@order_1.id)
+        expect(page).to have_content(@order_1.created_at)
+        expect(page).to have_content(@order_1.updated_at)
+        expect(page).to have_content(@order_1.status)
+
+        expect(page).to have_content(@paper.name)
+        expect(page).to have_content(@paper.description)
+        expect(page).to have_content(@paper.thumbnail)
+        expect(page).to have_content(@paper.quantity)
+        expect(page).to have_content(@paper.price)
+        expect(page).to have_content(@paper.subtotal)
+        expect(page).to have_content(@pencil.name)
+        expect(page).to have_content(@pencil.description)
+        expect(page).to have_content(@pencil.thumbnail)
+        expect(page).to have_content(@pencil.quantity)
+        expect(page).to have_content(@pencil.price)
+        expect(page).to have_content(@pencil.subtotal)
+
+        expect(page).to have_content(@order_1.total_items)
+        expect(page).to have_content(@order_1.grandtotal)
+      end
     end
   end
 end
