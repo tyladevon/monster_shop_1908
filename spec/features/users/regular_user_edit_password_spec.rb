@@ -42,7 +42,7 @@ RSpec.describe "Regular user visit profile page" do
       fill_in :password_confirmation, with: " "
       click_button "Submit"
 
-      expect(page).to have_content("Password can't be blank")
+      expect(page).to have_content("Passwords must match and not be blank.")
     end
   end
 end
