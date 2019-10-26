@@ -6,7 +6,7 @@
     <p>Order Date: <%= order.created_at %></p>
     <p>Last Updated: <%= order.updated_at %></p>
     <p>Status: <%= order.status %></p>
-    <p>Total Items: <%= number_to_currency(order.total_items) %></p>
+    <p>Total Items: <%= order.total_items %></p>
     <p>Grand Total: <%= number_to_currency(order.grandtotal) %></p>
   </section>
 <% end %>
