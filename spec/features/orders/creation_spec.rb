@@ -59,7 +59,8 @@ RSpec.describe("Order Creation") do
 
       new_order = Order.last
 
-      expect(current_path).to eq("/orders/#{new_order.id}")
+      visit ("/profile/orders/#{new_order.id}")
+      expect(current_path).to eq("/profile/orders/#{new_order.id}")
 
       within '.shipping-address' do
         expect(page).to have_content(name)
@@ -100,6 +101,8 @@ RSpec.describe("Order Creation") do
       within "#datecreated" do
         expect(page).to have_content(new_order.created_at)
       end
+
+      expect(new_order.status).to eq("Pending")
     end
 
     it 'i cant create order if info not filled out' do
@@ -121,6 +124,23 @@ RSpec.describe("Order Creation") do
       expect(page).to have_button("Create Order")
     end
 
+    it "When I checkout, I am redirected to my profile orders page, where I see a flash message" do
+      name = "Bert"
+      address = "123 Sesame St."
+      city = "NYC"
+      state = "New York"
+      zip = 10001
 
+      fill_in :name, with: name
+      fill_in :address, with: address
+      fill_in :city, with: city
+      fill_in :state, with: state
+      fill_in :zip, with: zip
+
+      click_button "Create Order"
+
+      expect(current_path).to eq('/profile/orders')
+      expect(page).to have_content("Your order has been created!")
+    end
   end
 end

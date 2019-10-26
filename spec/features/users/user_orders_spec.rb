@@ -25,9 +25,9 @@ RSpec.describe 'As a registered user' do
 
       expect(page).to_not have_link('My Orders')
 
-      @order_1 = @user.orders.create(name: "Reg", address: "123 Street", city: "Denver", state: "CO", zip: "80202", user_id: @user.id)
-      ItemOrder.create(order_id: @order_1.id, item_id: @paper.id, price: 20, quantity: 2)
-      ItemOrder.create(order_id: @order_1.id, item_id: @pencil.id, price: 2, quantity: 2)
+      order_1 = @user.orders.create(name: "Reg", address: "123 Street", city: "Denver", state: "CO", zip: "80202", user_id: @user.id)
+      ItemOrder.create(order_id: order_1.id, item_id: @paper.id, price: 20, quantity: 2)
+      ItemOrder.create(order_id: order_1.id, item_id: @pencil.id, price: 2, quantity: 2)
 
       visit '/profile'
 
@@ -35,9 +35,9 @@ RSpec.describe 'As a registered user' do
     end
 
     it "When I click on My Orders, I am redirected to /profile/orders" do
-      @order_1 = @user.orders.create(name: "Reg", address: "123 Street", city: "Denver", state: "CO", zip: "80202", user_id: @user.id)
-      ItemOrder.create(order_id: @order_1.id, item_id: @paper.id, price: 20, quantity: 2)
-      ItemOrder.create(order_id: @order_1.id, item_id: @pencil.id, price: 2, quantity: 2)
+      order_1 = @user.orders.create(name: "Reg", address: "123 Street", city: "Denver", state: "CO", zip: "80202", user_id: @user.id)
+      ItemOrder.create(order_id: order_1.id, item_id: @paper.id, price: 20, quantity: 2)
+      ItemOrder.create(order_id: order_1.id, item_id: @pencil.id, price: 2, quantity: 2)
 
       visit '/profile'
 

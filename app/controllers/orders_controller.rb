@@ -19,7 +19,8 @@ class OrdersController <ApplicationController
           })
       end
       session.delete(:cart)
-      redirect_to "/orders/#{order.id}"
+      flash[:notice] = "Your order has been created!"
+      redirect_to "/profile/orders"
     else
       flash[:notice] = "Please complete address form to create an order."
       render :new
@@ -27,6 +28,7 @@ class OrdersController <ApplicationController
   end
 
   def index
+    # NOTE: Which is less bad, two ivars or @user.orders in the view?
     @user = current_user
   end
 
