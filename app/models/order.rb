@@ -3,6 +3,7 @@ class Order <ApplicationRecord
 
   has_many :item_orders
   has_many :items, through: :item_orders
+  has_many :merchants, through: :item_orders
   belongs_to :user
 
   def grandtotal
@@ -12,4 +13,6 @@ class Order <ApplicationRecord
   def total_items
     item_orders.sum(:quantity)
   end
+
+  
 end
