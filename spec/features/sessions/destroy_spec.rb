@@ -4,6 +4,8 @@ RSpec.describe "Session destroy" do
   describe "As a registered user, merchant, or admin" do
     describe "When I visit the logout path" do
       it 'I am redirected to the welcome / home page of the site' do
+        meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
+
         user = User.create(
           name: "Bob G",
           street_address: "123 Avenue",
@@ -13,7 +15,8 @@ RSpec.describe "Session destroy" do
           email: "bobg2@agency.com",
           password: "bobg",
           password_confirmation: "bobg",
-          role: 2
+          role: 2,
+          merchant_id: meg.id
         )
 
         visit '/login'

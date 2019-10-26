@@ -16,7 +16,7 @@ RSpec.describe "Sessions New" do
     fill_in :email, with: "bobg@agency.com"
     fill_in :password, with: "bobg"
     click_button 'Login'
-    
+
     expect(current_path).to eq('/profile')
 
     visit '/login'
@@ -52,6 +52,8 @@ RSpec.describe "Sessions New" do
   end
 
   it "As a merchant employee or admin, I am redirected to /merchant/admin if logged in" do
+    meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
+
     user = User.create(
       name: "Bob G",
       street_address: "123 Avenue",
@@ -61,14 +63,15 @@ RSpec.describe "Sessions New" do
       email: "bobg2@agency.com",
       password: "bobg",
       password_confirmation: "bobg",
-      role: 2
+      role: 2,
+      merchant_id: meg.id
     )
 
     visit '/login'
     fill_in :email, with: "bobg2@agency.com"
     fill_in :password, with: "bobg"
     click_button 'Login'
-    
+
     expect(current_path).to eq('/merchant')
 
     visit '/login'

@@ -34,6 +34,8 @@ describe "as a visitor who is not logged in" do
     end
 
     it "if I am a merchant user I am redirected to my merchant dashboard page, and see a success message" do
+      meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
+
       user = User.create(
         name: "Bob G",
         street_address: "123 Avenue",
@@ -43,7 +45,8 @@ describe "as a visitor who is not logged in" do
         email: "bobg@agency.com",
         password: "bobg",
         password_confirmation: "bobg",
-        role: 2
+        role: 2,
+        merchant_id: meg.id
       )
 
       fill_in :email, with: "bobg@agency.com"
@@ -91,7 +94,7 @@ describe "as a visitor who is not logged in" do
       fill_in :email, with: "hill@agency.com"
       fill_in :password, with: "wrongpass"
       click_button 'Login'
-      
+
       expect(current_path).to eq('/login')
       expect(page).to have_content("Email and password do not match.")
     end
