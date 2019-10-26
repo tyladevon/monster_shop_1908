@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "As a registered user" do
   describe "I visit my profile orders page" do
-    it "I see details of every order I've made" do
+    before(:each) do
       @user = User.create(
         name: "Profile User",
         street_address: "345 Blvd",
@@ -24,7 +24,9 @@ describe "As a registered user" do
       ItemOrder.create(order_id: @order_1.id, item_id: @pencil.id, price: 2, quantity: 2)
 
       visit '/profile/orders'
-
+    end
+    
+    it "I see details of every order I've made" do
       within "#order-#{@order_1.id}" do
         expect(page).to have_link(@order_1.id)
         expect(page).to have_content(@order_1.created_at)
@@ -33,6 +35,12 @@ describe "As a registered user" do
         expect(page).to have_content(@order_1.total_items)
         expect(page).to have_content(@order_1.grandtotal)
       end
+    end
+
+    it "When I click the link of the id, I am brought to that order's show page" do
+      click_link "#{@order_1.id}"
+
+      expect(current_path).to eq("/profile/orders/#{@order_1.id}")
     end
   end
 end
