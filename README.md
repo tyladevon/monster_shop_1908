@@ -572,7 +572,7 @@ Orders are sorted by "status" in this order:
 User Story 31, Admin can "ship" an order
 
 As an admin user
-When I log into my dashboard, "/admin/dashboard"
+When I log into my dashboard, "/admin"
 Then I see any "packaged" orders ready to ship.
 Next to each order I see a button to "ship" the order.
 When I click that button for an order, the status of that order changes to "shipped"

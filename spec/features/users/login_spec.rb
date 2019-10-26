@@ -50,7 +50,7 @@ describe "as a visitor who is not logged in" do
       fill_in :password, with: "bobg"
       click_button 'Login'
 
-      expect(current_path).to eq('/merchant/dashboard')
+      expect(current_path).to eq('/merchant')
       expect(page).to have_content("Welcome, #{user.name}!")
     end
 
@@ -71,7 +71,7 @@ describe "as a visitor who is not logged in" do
       fill_in :password, with: "hill"
       click_button 'Login'
 
-      expect(current_path).to eq('/admin/dashboard')
+      expect(current_path).to eq('/admin')
       expect(page).to have_content("Welcome, #{user.name}!")
     end
 

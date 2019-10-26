@@ -25,7 +25,7 @@ RSpec.describe "Sessions New" do
     expect(page).to have_content("You are already logged in #{user.name}")
   end
 
-  it "As a admin, I am redirected to /admin/dashboard if logged in" do
+  it "As a admin, I am redirected to /admin if logged in" do
     user = User.create(
       name: "Bob G",
       street_address: "123 Avenue",
@@ -43,11 +43,11 @@ RSpec.describe "Sessions New" do
     fill_in :password, with: "bobg"
     click_button 'Login'
 
-    expect(current_path).to eq('/admin/dashboard')
+    expect(current_path).to eq('/admin')
 
     visit '/login'
 
-    expect(current_path).to eq('/admin/dashboard')
+    expect(current_path).to eq('/admin')
     expect(page).to have_content("You are already logged in #{user.name}")
   end
 
@@ -69,11 +69,11 @@ RSpec.describe "Sessions New" do
     fill_in :password, with: "bobg"
     click_button 'Login'
     
-    expect(current_path).to eq('/merchant/dashboard')
+    expect(current_path).to eq('/merchant')
 
     visit '/login'
 
-    expect(current_path).to eq('/merchant/dashboard')
+    expect(current_path).to eq('/merchant')
     expect(page).to have_content("You are already logged in #{user.name}")
   end
 end

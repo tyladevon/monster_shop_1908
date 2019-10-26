@@ -14,9 +14,9 @@ class SessionsController < ApplicationController
       if user.reg?
         redirect_to '/profile'
       elsif user.admin?
-        redirect_to '/admin/dashboard'
+        redirect_to '/admin'
       elsif user.merch_employee? || user.merch_admin?
-        redirect_to '/merchant/dashboard'
+        redirect_to '/merchant'
       end
     else
       flash.now[:error] = "Email and password do not match."
@@ -40,9 +40,9 @@ class SessionsController < ApplicationController
       if current_user.reg?
         redirect_to '/profile'
       elsif current_merchant?
-        redirect_to '/merchant/dashboard'
+        redirect_to '/merchant'
       elsif current_admin?
-        redirect_to '/admin/dashboard'
+        redirect_to '/admin'
       end
     end
 end
