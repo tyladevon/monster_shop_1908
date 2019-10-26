@@ -43,24 +43,23 @@ describe "As a registered user" do
         click_link "#{@order_1.id}"
 
         expect(current_path).to eq("/profile/orders/#{@order_1.id}")
-        save_and_open_page
-        expect(page).to have_link(@order_1.id)
+        expect(page).to have_content(@order_1.id)
         expect(page).to have_content(@order_1.created_at)
         expect(page).to have_content(@order_1.updated_at)
         expect(page).to have_content(@order_1.status)
 
         expect(page).to have_content(@paper.name)
         expect(page).to have_content(@paper.description)
-        expect(page).to have_content(@paper.thumbnail)
-        expect(page).to have_content(@paper.quantity)
+        expect(page).to have_css("img[src*='printable-lined-paper-wide-ruled.png']")
+        expect(page).to have_content(2)
         expect(page).to have_content(@paper.price)
-        expect(page).to have_content(@paper.subtotal)
+        expect(page).to have_content("$40.00")
         expect(page).to have_content(@pencil.name)
         expect(page).to have_content(@pencil.description)
-        expect(page).to have_content(@pencil.thumbnail)
-        expect(page).to have_content(@pencil.quantity)
+        expect(page).to have_css("img[src*='I/31BlVr01izL._SX425_.jpg']")
+        expect(page).to have_content(2)
         expect(page).to have_content(@pencil.price)
-        expect(page).to have_content(@pencil.subtotal)
+        expect(page).to have_content("$4.00")
 
         expect(page).to have_content(@order_1.total_items)
         expect(page).to have_content(@order_1.grandtotal)
