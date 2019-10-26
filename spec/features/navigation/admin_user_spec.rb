@@ -36,7 +36,7 @@ end
   end
 
   it "cannot access merchant or cart path" do
-    visit "/merchant/dashboard"
+    visit "/merchant"
     expect(page).to have_content("The page you were looking for doesn't exist.")
 
     visit "/cart"

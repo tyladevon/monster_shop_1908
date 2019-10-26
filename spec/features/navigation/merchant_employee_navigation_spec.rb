@@ -30,7 +30,7 @@ describe 'As a merchant employee user' do
   end
 
   it "can't access admin paths" do
-    visit '/admin/dashboard'
+    visit '/admin'
 
     expect(page).to have_content("The page you were looking for doesn't exist")
   end
