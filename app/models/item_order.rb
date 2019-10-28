@@ -7,4 +7,8 @@ class ItemOrder <ApplicationRecord
   def subtotal
     price * quantity
   end
+
+  def filter_item_order(id)
+    item.merchant_id == id
+  end
 end
