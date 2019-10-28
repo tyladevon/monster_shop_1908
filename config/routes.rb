@@ -37,6 +37,7 @@ Rails.application.routes.draw do
 
   get "/profile/orders", to: "orders#index"
   get "/profile/orders/:id", to: 'orders#show'
+  patch "/profile/orders/:id", to: 'orders#update'
 
   namespace :admin do
     get '/', to: 'dashboard#index'

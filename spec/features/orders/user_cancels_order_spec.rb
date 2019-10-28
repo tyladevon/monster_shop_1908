@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "As a registered user" do
   describe "when I visit an orders show page" do
-    xit "I click cancel order button" do
+    it "I click 'Cancel Order' button only if order is pending" do
       @user = User.create(
         name: "Profile User",
         street_address: "345 Blvd",
@@ -28,14 +28,15 @@ describe "As a registered user" do
 
       expect(current_path).to eq("/profile")
       expect(page).to have_content("Your order is now cancelled")
-
-
+      expect(@order_1.status).to eq("Cancelled")
     end
   end
 end
 
-# - only if the order is still pending
+# When I click the cancel button for an order, the following happens:
 # - Each row in the "order items" table is given a status of "unfulfilled"
 # - The order itself is given a status of "cancelled"
 # - Any item quantities in the order that were previously fulfilled have their quantities returned to their respective merchant's inventory for that item.
+# - I am returned to my profile page
+# - I see a flash message telling me the order is now cancelled
 # - And I see that this order now has an updated status of "cancelled"
