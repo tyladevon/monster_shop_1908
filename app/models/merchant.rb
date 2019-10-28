@@ -31,15 +31,12 @@ class Merchant <ApplicationRecord
     item_orders.where(order_id: order.id).sum(:quantity)
   end
 
-  def unique_orders
-    orders.distinct
+  def pending_orders
+    orders.where(status: "Pending").distinct
   end
 
   def merch_total_value(order)
-    #note: item_orders.sum("self.subtotal").where(order_id: order.id)
-    item_orders.where(order_id: order.id).sum do |item_order|
-      item_order.subtotal
-    end
+    item_orders.where(order_id: order.id).sum('item_orders.quantity * item_orders.price')
   end
 
 end
