@@ -11,4 +11,8 @@ class ItemOrder <ApplicationRecord
   def filter_item_order(id)
     item.merchant_id == id
   end
+
+  def can_be_fulfilled?
+    item.inventory >= quantity && !fulfilled
+  end
 end
