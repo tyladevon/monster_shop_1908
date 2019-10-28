@@ -5,11 +5,18 @@
 
 <section>
   <% @order.item_orders.each do |item_order| %> 
-    <% if item_order.filter_item_order(current_user.merchant_id) %>
-      <%= link_to(("#{item_order.item.name}"), "/items/#{item_order.item.id}") %> 
-      <%= image_tag(item_order.item.image) %>
-      <p>Price: <%= number_to_currency(item_order.price) %></p>
-      <p>Quantity: <%= item_order.quantity %></p>
-    <% end %>
+    <section id="item_order-<%= item_order.id %>">
+      <% if item_order.filter_item_order(current_user.merchant_id) %>
+        <%= link_to(("#{item_order.item.name}"), "/items/#{item_order.item.id}") %> 
+        <%= image_tag(item_order.item.image) %>
+        <p>Price: <%= number_to_currency(item_order.price) %></p>
+        <p>Quantity: <%= item_order.quantity %></p>
+        <% if item_order.can_be_fulfilled? %>
+          <%= button_to "Fulfill Item", item_order_path(item_order.id), method: :patch %>
+        <% elsif item_order.fulfilled %>
+          <p>"Fulfilled"</p>
+        <% end %>
+      <% end %>
+    </section>
   <% end %>
 </section>
