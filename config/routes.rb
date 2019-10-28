@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
   resources :orders, only:[:new, :create, :show]
 
+  resources :item_orders, only: [:update]
+
   post "/cart/:item_id", to: "cart#add_item"
   get "/cart", to: "cart#show"
   delete "/cart", to: "cart#empty"
