@@ -46,5 +46,6 @@ Rails.application.routes.draw do
   namespace :merchant do
     get '/', to: 'dashboard#index'
     get '/orders/:id', to: 'orders#show'
+    get '/items', to: "items#index"
   end
 end
