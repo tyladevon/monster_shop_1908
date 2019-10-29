@@ -48,5 +48,6 @@ Rails.application.routes.draw do
     get '/orders/:id', to: 'orders#show'
     get '/items', to: "items#index"
     patch '/items/:id/:type', to: "items#update"
+    delete '/items/:id', to: "items#destroy"
   end
 end
