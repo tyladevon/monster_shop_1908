@@ -32,6 +32,17 @@ class OrdersController <ApplicationController
     @user = current_user
   end
 
+  def update
+    order = Order.find(params[:id])
+    order.update(status: "Cancelled")
+    # item_array = Item.find(order.item_orders.where(fulfilled: true).pluck(:item_id))
+    # order.item_orders.joins(:item).where(fulfilled: true)
+    binding.pry
+    item_array.update_all()
+    flash[:success] = "Your order has been cancelled"
+    redirect_to "/profile"
+  end
+
 
   private
 
