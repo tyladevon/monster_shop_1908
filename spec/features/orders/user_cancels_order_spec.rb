@@ -33,4 +33,3 @@ describe "As a registered user" do
   end
 end
 
-# - And I see that this order now has an updated status of "cancelled"
