@@ -1,1 +1,14 @@
 <h1>My Items</h1>
+
+<% @items.each do |item| %>
+  <section id="item-<%= item.id %>">
+    <h3><%= item.name %></h3>
+    <p>Price: <%= number_to_currency(item.price) %></p>
+    <p>Inventory: <%= item.inventory %></p>
+    <% if item.active? %>
+      <%= button_to "Deactivate", "/merchant/items/#{item.id}/deactivate", method: :patch %>
+    <% elsif !item.active? %>
+      <%= button_to "Activate", "/merchant/items/#{item.id}/activate", method: :patch %>
+    <% end %>
+  </section>
+<% end %>
