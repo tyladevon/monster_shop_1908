@@ -47,5 +47,6 @@ Rails.application.routes.draw do
     get '/', to: 'dashboard#index'
     get '/orders/:id', to: 'orders#show'
     get '/items', to: "items#index"
+    patch '/items/:id/:type', to: "items#update"
   end
 end
