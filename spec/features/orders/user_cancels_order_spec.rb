@@ -33,7 +33,6 @@ describe "As a registered user" do
   end
 end
 
-# When I click the cancel button for an order, the following happens:
 # - Each row in the "order items" table is given a status of "unfulfilled"
 # - The order itself is given a status of "cancelled"
 # - Any item quantities in the order that were previously fulfilled have their quantities returned to their respective merchant's inventory for that item.
