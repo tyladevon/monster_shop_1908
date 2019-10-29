@@ -2,6 +2,7 @@
 <p><%= @user.merchant.address %></p>
 <p><%= "#{@user.merchant.city}, #{@user.merchant.state} #{@user.merchant.zip}" %></p>
 
+<p><%= link_to "My Items", "/merchant/items" %></p>
 
 <% @user.merchant.pending_orders.each do |order| %>
   <section id= "order-<%= order.id %>">
