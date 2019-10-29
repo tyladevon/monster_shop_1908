@@ -15,4 +15,13 @@ class Merchant::ItemsController < Merchant::BaseController
     end
     redirect_to '/merchant/items'
   end
+
+  def destroy
+    item = Item.find(params[:id])
+    if item.no_orders?
+      item.destroy
+      flash[:notice] = "Your #{item.name} has been deleted"
+      redirect_to "/merchant/items"
+    end
+  end
 end
