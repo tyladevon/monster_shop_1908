@@ -54,6 +54,8 @@ RSpec.describe 'As a merchant employee or admin' do
             expect(page).to have_content("Fulfilled")
             expect(page).to_not have_button("Fulfill Item")
           end
+
+          expect(Item.find(@paper.id).inventory).to eq(1)
         end
 
         it "if my inventory is too low to fulfill the item, I see text indicating my inventory is too low" do
