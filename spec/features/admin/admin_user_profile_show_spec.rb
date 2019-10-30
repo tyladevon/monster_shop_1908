@@ -28,7 +28,6 @@ RSpec.describe "As an admin user" do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@admin)
 
     visit "/admin/users/#{@user.id}"
-      save_and_open_page
     end
 
     it "I see the same information the user would see themselves" do
