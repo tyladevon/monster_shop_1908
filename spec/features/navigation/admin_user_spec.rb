@@ -27,7 +27,7 @@ end
 
   it "can see admin links" do
     expect(page).to have_link "Admin Dashboard"
-    expect(page).to have_link "All Users"
+    expect(page).to have_link "Users"
 
   end
 
