@@ -4,7 +4,7 @@ class Merchant::ItemsController < Merchant::BaseController
     @items = Item.where(merchant_id: current_user.merchant_id)
   end
 
-  def update 
+  def update
     item = Item.find(params[:id])
     if params["type"] == "deactivate"
       item.update(active?: false)
@@ -14,5 +14,12 @@ class Merchant::ItemsController < Merchant::BaseController
       flash[:notice] = "#{item.name} is available for sale"
     end
     redirect_to '/merchant/items'
+  end
+
+  def destroy
+    item = Item.find(params[:id])
+    item.destroy
+    flash[:notice] = "Your #{item.name} has been deleted"
+    redirect_to "/merchant/items"
   end
 end
