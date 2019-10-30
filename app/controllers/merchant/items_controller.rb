@@ -4,7 +4,7 @@ class Merchant::ItemsController < Merchant::BaseController
     @items = Item.where(merchant_id: current_user.merchant_id)
   end
 
-  def update 
+  def update
     item = Item.find(params[:id])
     if params["type"] == "deactivate"
       item.update(active?: false)
@@ -15,4 +15,27 @@ class Merchant::ItemsController < Merchant::BaseController
     end
     redirect_to '/merchant/items'
   end
+
+  def new
+    @merchant = current_user.merchant
+    @item = @merchant.items.new
+  end
+
+  def create
+    merchant = current_user.merchant
+    item = merchant.items.new(item_params)
+    item.image = 'https://via.placeholder.com/36' if item.image.blank?
+    if item.save
+      flash[:success] = "#{item.name} has been created!"
+      redirect_to '/merchant/items'
+    else
+      flash[:error] = item.errors.full_messages.to_sentence
+      redirect_to '/merchant/items/new'
+    end
+  end
+
+  private
+    def item_params
+      params.require(:item).permit(:name, :description, :price, :image, :inventory)
+    end
 end
