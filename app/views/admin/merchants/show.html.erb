@@ -1,0 +1,14 @@
+<h1><%= @merchant.name %></h1>
+<p><%= @merchant.address %></p>
+<p><%= "#{@merchant.city}, #{@merchant.state} #{@merchant.zip}" %></p>
+
+<p><%= link_to "My Items", "/merchant/items" %></p>
+
+<% @merchant.pending_orders.each do |order| %>
+  <section id= "order-<%= order.id %>">
+    <%= link_to "#{order.id}", "/merchant/orders/#{order.id}" %>
+    <p><%= order.created_at %></p>
+    <p>Total Quantity: <%= @merchant.merch_item_count(order) %></p>
+    <p>Total Value: <%= number_to_currency(@merchant.merch_total_value(order)) %></p>
+  </section>
+<% end  %>
