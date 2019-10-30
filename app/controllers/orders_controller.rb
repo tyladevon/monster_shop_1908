@@ -35,10 +35,11 @@ class OrdersController <ApplicationController
   def update
     order = Order.find(params[:id])
     order.update(status: "Cancelled")
-    return_stock
-    item_array.update_all()
-    flash[:success] = "Your order has been cancelled"
-    redirect_to "/profile"
+    if order.save 
+      return_stock(order)
+      flash[:success] = "Your order has been cancelled"
+      redirect_to "/profile"
+    end
   end
 
 
@@ -48,7 +49,7 @@ class OrdersController <ApplicationController
     params.permit(:name, :address, :city, :state, :zip)
   end
 
-  def return_stock
+  def return_stock(order)
     order.item_orders.where(fulfilled: true).each do |item_order|
       item_order.item.update_attributes(:inventory => (item_order.item.inventory + item_order.quantity))
     end
