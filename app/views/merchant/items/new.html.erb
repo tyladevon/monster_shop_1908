@@ -1,0 +1,22 @@
+<h1>Create New Item For <%=link_to @merchant.name, "/merchants/#{@merchant.id}" %></h1>
+
+<center>
+  <%= form_for @item, :url => '/merchant/items' do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+
+    <%= f.label :price %>
+    <%= f.text_field :price %>
+
+    <%= f.label :image %>
+    <%= f.text_field :image, :input_html => { :value => 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIIAAACCCAMAAAC93eDPAAAAUVBMVEX////8/Pyvr6+Xl5fp6emioqKysrL19fWenp7d3d2BgYGOjo62tra7u7vt7e35+fnDw8Opqal1dXWIiIjMzMzS0tI6OjpXV1crKyvj4+NmZmaA7ffvAAABKklEQVR4nO3W2Y6CMBhA4UKplaWUdRzm/R90yqbECN5MfkzmfDeWNpETQKlSAAAAAAAAAAAAwKdK4kOVQMKlTw6UuRdISJSKdoRlY0USGnN9yTRiCdneWv7fEmxfnpxQZp3u73Prr0A0IZxM6WWmanVWyifEqSrNUhCH29KW4glK53o+WTWV2MyKJ6yKev70jT0pobisIx+ehzMSqvqxYFsrnNDlbdqZ7YptM9GEuAiP5PPf5JdkQuHG8fPuQPJGuHg+MN19PvLWt2IJ+Vqg1HVsiFIXXt/G1DexhO/N9c/ri74Wg4+mA7ktyzKMBqddunljyiXcKjcytx8dRsWdk7sRQzoZkmXwIJTwYquyIZEQdgdHmvff8Af2tvDrPh4AAAAAAAAAAAD4UL/Gtw0B9gHxYgAAAABJRU5ErkJggg=='} %> %>
+
+    <%= f.label :inventory %>
+    <%= f.text_field :inventory %>
+
+    <%= f.submit %>
+  <% end %>
+</center>

@@ -16,10 +16,33 @@ class Merchant::ItemsController < Merchant::BaseController
     redirect_to '/merchant/items'
   end
 
+  def new
+    @merchant = current_user.merchant
+    @item = @merchant.items.new
+  end
+
+  def create
+    merchant = current_user.merchant
+    item = merchant.items.new(item_params)
+    item.image = 'https://via.placeholder.com/36' if item.image.blank?
+    if item.save
+      flash[:success] = "#{item.name} has been created!"
+      redirect_to '/merchant/items'
+    else
+      flash[:error] = item.errors.full_messages.to_sentence
+      redirect_to '/merchant/items/new'
+    end
+  end
+
   def destroy
     item = Item.find(params[:id])
     item.destroy
     flash[:notice] = "Your #{item.name} has been deleted"
     redirect_to "/merchant/items"
   end
+  
+  private
+    def item_params
+      params.require(:item).permit(:name, :description, :price, :image, :inventory)
+    end
 end
