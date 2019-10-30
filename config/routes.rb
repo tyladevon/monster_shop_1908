@@ -50,5 +50,6 @@ Rails.application.routes.draw do
     get '/items/new', to: 'items#new'
     patch '/items/:id/:type', to: "items#update"
     post '/items', to: 'items#create'
+    delete '/items/:id', to: "items#destroy"
   end
 end
