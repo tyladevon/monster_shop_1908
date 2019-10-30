@@ -51,5 +51,7 @@ Rails.application.routes.draw do
     patch '/items/:id/:type', to: "items#update"
     post '/items', to: 'items#create'
     delete '/items/:id', to: "items#destroy"
+    get '/items/:id', to: "items#edit"
+    patch '/items/:id/:type', to: "items#update"
   end
 end
