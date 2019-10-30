@@ -8,6 +8,7 @@
     <%= image_tag(item.image) %>
     <p>Price: <%= number_to_currency(item.price) %></p>
     <p>Inventory: <%= item.inventory %></p>
+    <p><%= button_to "Edit", "/merchant/items/#{item.id}", method: :get %></p>
     <% if item.no_orders? %>
       <p><%= button_to "Delete", "/merchant/items/#{item.id}", method: :delete %></p>
     <% end %>
