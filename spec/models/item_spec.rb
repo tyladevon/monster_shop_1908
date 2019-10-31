@@ -41,6 +41,14 @@ describe Item, type: :model do
       expect(bottom_three).to eq([@review_3,@review_4,@review_5])
     end
 
+    it 'top_five_most_popular' do
+      
+    end
+
+    it 'least_popular' do
+
+    end
+
     it 'no orders' do
       user = User.create(
         name: "Profile User",
