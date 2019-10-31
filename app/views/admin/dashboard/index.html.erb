@@ -2,7 +2,7 @@
 
 <section class="grid-container">
   <% @orders.each do |order| %>
-    <section id = "order-<%= order.id %>, class = "grid-item" ">
+    <section id = "order-<%= order.id %>", class = "grid-item">
       <p>Order Id: <%= order.id %></p>
       <p>User: <%= link_to "#{order.user_id}", "admin/users/#{order.user_id}" %></p>
       <p>Order Date: <%= order.created_at %></p>
