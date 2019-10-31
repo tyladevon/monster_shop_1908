@@ -62,5 +62,25 @@ describe Merchant, type: :model do
       expect(@meg.distinct_cities).to eq(["Denver","Hershey"])
     end
 
+    it "merch_item_count" do
+      order_1 = Order.create!(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033, user_id: @user.id)
+      item_order_1 = order_1.item_orders.create!(item: @tire, price: @tire.price, quantity: 2)
+
+      expect(@meg.merch_item_count(order_1)).to eq(2)
+    end
+
+    it "pending_orders" do
+      order_1 = Order.create!(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033, user_id: @user.id)
+      item_order_1 = order_1.item_orders.create!(item: @tire, price: @tire.price, quantity: 2)
+
+      expect(@meg.pending_orders).to eq(Order.where(id: order_1.id))
+    end
+
+    it "merch_total_value" do
+      order_1 = Order.create!(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033, user_id: @user.id)
+      item_order_1 = order_1.item_orders.create!(item: @tire, price: @tire.price, quantity: 2)
+
+      expect(@meg.merch_total_value(order_1)).to eq(200)
+    end
   end
 end
