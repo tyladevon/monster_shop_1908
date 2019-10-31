@@ -1,10 +1,13 @@
-<h1>Admin Dashboard</h1>
+<h1>ALL ORDERS</h1>
 
 <% @orders.each do |order| %>
-  <section id="order-<%= order.id %>">
-    <p>Order-<%= order.id %></p>
-    <p><%= order.name %></p>
+  <section id = "order-<%= order.id %>">
+    <p>Order Id: <%= order.id %></p>
+    <p>User: <%= link_to "#{order.user_id}", "admin/users/#{order.user_id}" %></p>
+    <p>Order Date: <%= order.created_at %></p>
     <p>Status: <%= order.status %></p>
-    <%= button_to 'Ship Order', "/admin/orders/#{order.id}", method: :patch %>
+    <% if order.status == "Packaged" %>
+      <%= button_to 'Ship Order', "/admin/orders/#{order.id}", method: :patch %>
+    <% end %>
   </section>
 <% end %>
