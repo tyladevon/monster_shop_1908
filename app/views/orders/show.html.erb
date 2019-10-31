@@ -52,8 +52,12 @@
 <section id="grandtotal">
   <p>Total: <%=number_to_currency(@order.grandtotal)%></p>
 </section>
+<section id="totalitems">
+  <p>Total Items: <%= @order.total_items %></p>
+</section>
 <section id="datecreated">
-  <p> <%= @order.created_at%></p>
+  <p>Created At: <%= @order.created_at%></p>
+  <p>Updated At: <%= @order.updated_at %></p>
 </section>
 <% if @order.status != "Shipped" %>
   <p><%= button_to "Cancel Order", "/profile/orders/#{@order.id}", method: :patch %></p>

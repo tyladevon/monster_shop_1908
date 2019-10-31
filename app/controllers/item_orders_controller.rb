@@ -4,7 +4,7 @@ class ItemOrdersController < ApplicationController
     item_order = ItemOrder.find(params[:id])
     item_order.update(fulfilled: true)
     item_order.item.update_attributes(:inventory => (item_order.item.inventory - item_order.quantity))
-    if ItemOrder.where(fulfilled: false).empty?
+    if ItemOrder.where(fulfilled: false, order_id: item_order.id).empty?
       item_order.order.update(status: "Packaged")
     end
     flash[:notice] = "This item has been fulfilled - #{item_order.item.name}"

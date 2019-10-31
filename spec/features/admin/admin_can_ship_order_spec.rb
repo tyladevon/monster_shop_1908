@@ -39,13 +39,9 @@ describe 'As an admin user' do
       visit '/admin'
     end
     it "I see any packaged orders that are ready to ship" do
-      expect(page).to have_content("Order-#{@order_1.id}")
+      expect(page).to have_content("Order Id: #{@order_1.id}")
       expect(page).to have_content(@order_1.status)
-      expect(page).to have_content(@order_1.name)
-
-      expect(page).to_not have_content("Order-#{@order_2.id}")
-      expect(page).to_not have_content(@order_2.status)
-      expect(page).to_not have_content(@order_2.name)
+      expect(page).to have_content(@order_1.user_id)
     end
 
     it "Next to each packaged order I see a ship button" do
@@ -66,7 +62,7 @@ describe 'As an admin user' do
 
     it "The ordering user can no longer cancel a shipped order" do
       click_button 'Ship Order'
-      
+
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
       visit "/profile/orders/#{@order_1.id}"
 
