@@ -29,7 +29,7 @@
       <% else %>
         <%= link_to  "Profile", "/profile" %>
         <%= link_to  "Logout", "/logout", method: :delete %>
-        <p>Logged in as <%= current_user.name %></p>
+        <p>|| Logged in as <%= current_user.name %></p>
       <% end %>
     </nav>
     <% flash.each do |name, msg| %>
