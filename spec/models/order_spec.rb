@@ -40,13 +40,22 @@ describe Order, type: :model do
       @order_1.item_orders.create!(item: @tire, price: @tire.price, quantity: 2)
       @order_1.item_orders.create!(item: @pull_toy, price: @pull_toy.price, quantity: 3)
     end
-    
+
     it 'grandtotal' do
       expect(@order_1.grandtotal).to eq(230)
     end
 
     it 'total_items' do
       expect(@order_1.total_items).to eq(5)
+    end
+
+    it 'grouped_by_status' do
+      @order_2 = @user.orders.create(name: "Dee", address: "4233 Street", city: "Golden", state: "CO", zip: "80042", user_id: @user.id, status: "Cancelled")
+      @order_3 = @user.orders.create(name: "Dee", address: "4233 Street", city: "Golden", state: "CO", zip: "80042", user_id: @user.id, status: "Pending")
+      @order_4 = @user.orders.create(name: "Dee", address: "4233 Street", city: "Golden", state: "CO", zip: "80042", user_id: @user.id, status: "Packaged")
+      @order_5 = @user.orders.create(name: "Dee", address: "4233 Street", city: "Golden", state: "CO", zip: "80042", user_id: @user.id, status: "Shipped")
+
+      expect(Order.grouped_by_status.to_a).to eq([@order_4, @order_1, @order_3, @order_5, @order_2])
     end
   end
 end

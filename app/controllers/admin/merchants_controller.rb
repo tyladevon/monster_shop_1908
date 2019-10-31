@@ -1,4 +1,5 @@
 class Admin::MerchantsController < Admin::BaseController
+
   def index
     @merchants = Merchant.all
   end
@@ -14,4 +15,10 @@ class Admin::MerchantsController < Admin::BaseController
     end
     redirect_to '/admin/merchants'
   end
+
+ 
+  def show
+    @merchant = Merchant.find(params[:id])
+  end
 end
+
