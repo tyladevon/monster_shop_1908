@@ -24,4 +24,12 @@ class Item <ApplicationRecord
   def no_orders?
     item_orders.empty?
   end
+
+  def self.top_five_most_popular
+    item_orders.select(:quantity).max(:quantity).limit(5)
+  end
+
+  def self.least_popular
+    item_orders.select(:quantity).min(:quantity).limit(5)
+  end
 end
