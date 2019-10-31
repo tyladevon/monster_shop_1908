@@ -21,7 +21,7 @@
       <% end %>
       <% if current_user && current_user.admin? %>
         <%= link_to 'Admin Dashboard', '/admin' %>
-        <%= link_to 'All Users', '/admin/users' %>
+        <%= link_to 'Users', '/admin/users' %>
       <% end %>
       <% if !current_user %>
         <%= link_to  "Login", "/login" %>

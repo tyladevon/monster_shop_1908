@@ -1,4 +1,5 @@
 class Admin::MerchantsController < Admin::BaseController
+
   def index
     @merchants = Merchant.all
   end
@@ -15,5 +16,9 @@ class Admin::MerchantsController < Admin::BaseController
       flash[:notice] = "#{merchant.name} account is disabled."
     end
     redirect_to '/admin/merchants'
+  end
+
+  def show
+    @merchant = Merchant.find(params[:id])
   end
 end
