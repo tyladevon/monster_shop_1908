@@ -5,4 +5,8 @@ class Admin::UsersController < Admin::BaseController
       @user = User.find(params[:id])
     end
   end
+
+  def index
+    @users = User.all
+  end
 end
