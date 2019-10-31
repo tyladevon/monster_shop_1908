@@ -88,24 +88,44 @@ describe Item, type: :model do
       @tape = @mike.items.create(name: "Tape", description: "You can tape with it!", price: 5, image: "https://images-na.ssl-images-amazon.com/images/I/31BlVr01izL._SX425_.jpg", inventory: 100)
 
       @order_1 = @user.orders.create(name: "Reg", address: "123 Street", city: "Denver", state: "CO", zip: "80202", user_id: @user.id)
-      ItemOrder.create(order_id: @order_1.id, item_id: @paper.id, price: 5, quantity: 6)
-      ItemOrder.create(order_id: @order_1.id, item_id: @pencil.id, price: 2, quantity: 4)
-      ItemOrder.create(order_id: @order_1.id, item_id: @pen.id, price: 4, quantity: 7)
-      ItemOrder.create(order_id: @order_1.id, item_id: @binder.id, price: 8, quantity: 2)
-      ItemOrder.create(order_id: @order_1.id, item_id: @folder.id, price: 2, quantity: 10)
       ItemOrder.create(order_id: @order_1.id, item_id: @ruler.id, price: 3, quantity: 1)
-      ItemOrder.create(order_id: @order_1.id, item_id: @wide_rule.id, price: 4, quantity: 5)
-      ItemOrder.create(order_id: @order_1.id, item_id: @college_rule.id, price: 4, quantity: 9)
-      ItemOrder.create(order_id: @order_1.id, item_id: @divider.id, price: 4, quantity: 8)
+      ItemOrder.create(order_id: @order_1.id, item_id: @binder.id, price: 8, quantity: 2)
       ItemOrder.create(order_id: @order_1.id, item_id: @tape.id, price: 5, quantity: 3)
-
+      ItemOrder.create(order_id: @order_1.id, item_id: @pencil.id, price: 2, quantity: 4)
+      ItemOrder.create(order_id: @order_1.id, item_id: @wide_rule.id, price: 4, quantity: 5)
+      ItemOrder.create(order_id: @order_1.id, item_id: @paper.id, price: 5, quantity: 6)
+      ItemOrder.create(order_id: @order_1.id, item_id: @pen.id, price: 4, quantity: 7)
+      ItemOrder.create(order_id: @order_1.id, item_id: @divider.id, price: 4, quantity: 8)
+      ItemOrder.create(order_id: @order_1.id, item_id: @college_rule.id, price: 4, quantity: 9)
+      ItemOrder.create(order_id: @order_1.id, item_id: @folder.id, price: 2, quantity: 10)
     end
-  end
-  it 'top_five_most_popular' do
-    expect(Item.top_five_most_popular).to eq([@folder, @college_rule, @divider, @pen, @paper])
-  end
 
-  it 'least_popular' do
-    expect(Item.least_popular).to eq([@wide_rule, @pencil, @tape, @binder, @ruler])
+    it 'top_five_most_popular' do
+      pop = Item.top_five_most_popular
+      expect(pop[0].name).to eq(@folder.name)
+      expect(pop[0].sumq).to eq(10)
+      expect(pop[1].name).to eq(@college_rule.name)
+      expect(pop[1].sumq).to eq(9)
+      expect(pop[2].name).to eq(@divider.name)
+      expect(pop[2].sumq).to eq(8)
+      expect(pop[3].name).to eq(@pen.name)
+      expect(pop[3].sumq).to eq(7)
+      expect(pop[4].name).to eq(@paper.name)
+      expect(pop[4].sumq).to eq(6)
+    end
+
+    it 'least_popular' do
+      unpop = Item.least_popular
+      expect(unpop[0].name).to eq(@ruler.name)
+      expect(unpop[0].sumq).to eq(1)
+      expect(unpop[1].name).to eq(@binder.name)
+      expect(unpop[1].sumq).to eq(2)
+      expect(unpop[2].name).to eq(@tape.name)
+      expect(unpop[2].sumq).to eq(3)
+      expect(unpop[3].name).to eq(@pencil.name)
+      expect(unpop[3].sumq).to eq(4)
+      expect(unpop[4].name).to eq(@wide_rule.name)
+      expect(unpop[4].sumq).to eq(5)
+    end
   end
 end

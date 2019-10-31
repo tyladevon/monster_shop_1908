@@ -26,10 +26,10 @@ class Item <ApplicationRecord
   end
 
   def self.top_five_most_popular
-    Item.select("items.id, sum(quantity)").joins(:item_orders).group(:id).max(5)
+    Item.joins(:item_orders).select("items.name, sum(quantity) as sumq").group(:name).order('sumq DESC').limit(5)
   end
 
   def self.least_popular
-    Item.select("items.id, sum(quantity)").joins(:item_orders).group(:id).min(5)
+    Item.joins(:item_orders).select("items.name, sum(quantity) as sumq").group(:name).order('sumq ASC').limit(5)
   end
 end
