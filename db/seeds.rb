@@ -24,6 +24,17 @@ User.create(
   role: 2,
   merchant_id: dog_shop.id
 )
+User.create(
+  name: "Bike2",
+  street_address: "4233 Street",
+  city: "Golden",
+  state: "CO",
+  zip: "80042",
+  email: "mike2@gmail.com",
+  password: "rainbows1908",
+  role: 2,
+  merchant_id: bike_shop.id
+)
 
 User.create(
   name: "Mike3",
