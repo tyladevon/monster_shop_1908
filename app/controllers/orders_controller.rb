@@ -1,7 +1,6 @@
 class OrdersController <ApplicationController
 
   def new
-
   end
 
   def show
@@ -28,14 +27,13 @@ class OrdersController <ApplicationController
   end
 
   def index
-    # NOTE: Which is less bad, two ivars or @user.orders in the view?
     @user = current_user
   end
 
   def update
     order = Order.find(params[:id])
     order.update(status: "Cancelled")
-    if order.save 
+    if order.save
       return_stock(order)
       flash[:success] = "Your order has been cancelled"
       redirect_to "/profile"
